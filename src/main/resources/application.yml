@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: wake-on-play
+
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# Wake on Play's own configuration (consumed by the MVP *Config classes)
+wop:
+  dynamodb:
+    endpoint: http://localhost:8000   # DynamoDB Local from docker-compose
+    region: sa-east-1
+    table: wake-on-play
+  agent:
+    # Shared token for the local MVP. In production, authentication uses IAM.
+    shared-token: ${WOP_AGENT_TOKEN:dev-token-change-me}
